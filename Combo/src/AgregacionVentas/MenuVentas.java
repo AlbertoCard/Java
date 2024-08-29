@@ -1,20 +1,16 @@
 package AgregacionVentas;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MenuVentas {
     Scanner scn = new Scanner(System.in);
-    ArrayList<Venta> ventasLista = new ArrayList<Venta>();
 
     public void iniciarMenuVentas(){
         int opcion;
 
-//        leerArchivo();
+        Bd.crearArchivo();
 
         System.out.println("Menu de ventas");
 
@@ -34,7 +30,7 @@ public class MenuVentas {
                         break;
                     case 3:
                         System.out.println("Modificar venta");
-//                        modificarVenta();
+                        modificarVenta();
                         break;
                     case 4:
                         System.out.println("Mostrar ventas");
@@ -73,7 +69,7 @@ public class MenuVentas {
         MenuLineas menuLineas = new MenuLineas();
         menuLineas.iniciarMenuLineas(venta);
 
-        ventasLista.add(venta);
+        Bd.guardarVenta(venta);
     }
 
     public static String generateFolio() {
@@ -83,7 +79,7 @@ public class MenuVentas {
     }
 
     public static String generateFecha() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd-HH-mm-ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
         Date now = new Date();
         return sdf.format(now);
     }
@@ -92,87 +88,32 @@ public class MenuVentas {
         System.out.println("Ingrese el folio de la venta a eliminar: ");
         String folio = scn.nextLine();
 
-        for (Venta v : ventasLista){
-            if (v.getFolio().equals(folio)){
-                ventasLista.remove(v);
-                break;
-            }
-        }
+        Bd.eliminarVenta(folio);
     }
 
     public void modificarVenta(){
-        MenuLineas menuLineas = new MenuLineas();
         System.out.println("Ingrese el folio de la venta a modificar: ");
         String folio = scn.nextLine();
 
-        for (Venta v : ventasLista){
-            if (v.getFolio().equals(folio)){
-                menuLineas.iniciarMenuLineas(v);
-                break;
-            }
+        Venta venta = Bd.buscarVenta(folio);
+
+        if (venta != null){
+            MenuLineas menuLineas = new MenuLineas();
+            menuLineas.iniciarMenuLineas(venta);
+
+            Bd.eliminarVenta(folio);
+            Bd.guardarVenta(venta);
+        } else {
+            System.out.println("Venta no encontrada");
         }
     }
 
     public void mostrarVentas(){
-        System.out.println("Ventas");
+        System.out.println("Lista de Ventas:");
+        System.out.println("Folio:\t\t\t Fecha:\t  Lineas:");
 
-        for( Venta v : ventasLista){
-            System.out.println("Folio: " + v.getFolio());
-            System.out.println("Fecha: " + v.getFecha());
-            System.out.println("Lineas de venta");
-
-            for (Linea l : v.getLineas()){
-                if (l != null){
-                    System.out.println(l.getProducto() + " - " + l.getUnidades() + " - " + l.getPrecio());
-                }
-            }
-
-        }
+        Bd.mostrarVentas();
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void leerArchivo(){
-        String fileName = "bdVentas.json";
-        File file = new File(fileName);
-
-        try {
-            if (file.exists()) {
-                System.out.println("Cargando archivo...");
-            } else {
-                if (file.createNewFile()) {
-                    System.out.println("El archivo 'bdVentas.json' ha sido creado.");
-                } else {
-                    System.out.println("No se pudo crear el archivo 'bdVentas.json'.");
-                }
-            }
-        } catch (IOException e) {
-            // Maneja excepciones de entrada/salida
-            System.out.println("Ocurrió un error al manejar el archivo: " + e.getMessage());
-        }
-
-    }
 }

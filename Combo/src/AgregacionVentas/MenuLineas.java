@@ -31,7 +31,7 @@ public class MenuLineas {
                         mostrarLineas();
                         break;
                     case 0:
-                        System.out.println("Saliendo...");
+                        System.out.println("Guardando...");
                         break;
                     default:
                         System.out.println("Opcion no valida");
@@ -64,6 +64,7 @@ public class MenuLineas {
             System.out.println("Linea agregada");
         }
         else{
+            System.out.println("Cantidad maximas de lineas alcanzada");
             System.out.println("No se pudo agregar la linea");
         }
     }
@@ -79,7 +80,8 @@ public class MenuLineas {
         System.out.println("Productos: \t Unidades: \t Precio: ");
         for (Linea linea : venta.getLineas()){
             if (linea != null){
-                System.out.println(linea.getProducto() + " \t " + linea.getUnidades() + " \t " + linea.getPrecio());
+                // mostrar las lineas con el toString
+                System.out.println(linea.toString());
             }
         }
     }

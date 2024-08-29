@@ -1,6 +1,8 @@
 package AgregacionVentas;
 
-public class Venta {
+import java.io.Serializable;
+
+public class Venta implements Serializable {
     private String folio;
     private String fecha;
     private Linea [] lineas;
@@ -22,7 +24,6 @@ public class Venta {
                 break;
             }
             if(i == lineas.length - 1){
-                System.out.println("Cantidad maxima de lineas alcanzada");
                 agregada = false;
             }
         }
@@ -52,7 +53,15 @@ public class Venta {
         return lineas;
     }
 
-    public void setLineas(Linea[] lineas) {
-        this.lineas = lineas;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(folio).append(",").append(fecha).append(";");
+        for (Linea linea : lineas) {
+            if (linea != null) {
+                sb.append(linea.toString()).append(";");
+            }
+        }
+        return sb.toString();
     }
 }

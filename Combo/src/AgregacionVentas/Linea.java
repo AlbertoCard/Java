@@ -1,6 +1,8 @@
 package AgregacionVentas;
 
-public class Linea {
+import java.io.Serializable;
+
+public class Linea implements Serializable {
     private int producto, unidades, precio;
 
     public Linea(int producto, int unidades, int precio){
@@ -21,7 +23,9 @@ public class Linea {
         return precio;
     }
 
-    public void setUnidades(int unidades) {
-        this.unidades = unidades;
+
+    @Override
+    public String toString() {
+        return producto + "," + unidades + "," + precio;
     }
 }
