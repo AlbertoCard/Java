@@ -89,6 +89,7 @@ public class MenuVentas {
         String folio = scn.nextLine();
 
         Bd.eliminarVenta(folio);
+        System.out.println("Venta eliminada");
     }
 
     public void modificarVenta(){

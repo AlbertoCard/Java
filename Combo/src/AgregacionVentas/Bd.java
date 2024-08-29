@@ -1,6 +1,8 @@
 package AgregacionVentas;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bd {
 
@@ -18,17 +20,37 @@ public class Bd {
     }
 
     // guardar venta
-    public static boolean guardarVenta(Venta venta){
+    public static boolean guardarVenta(Venta venta) {
         String fileName = "ventas.txt";
         boolean guardado = false;
+        List<Venta> ventas = new ArrayList<>();
 
-        try (FileOutputStream file = new FileOutputStream(fileName, true);
-             ObjectOutputStream output = new ObjectOutputStream(file)){
+        try (FileInputStream fileIn = new FileInputStream(fileName);
+             ObjectInputStream input = new ObjectInputStream(fileIn)) {
+            while (true) {
+                try {
+                    ventas.add((Venta) input.readObject());
+                } catch (EOFException e) {
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
 
-            output.writeObject(venta);
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Ocurrió un error al leer el archivo: " + e);
+        }
+
+        // Añadir la nueva venta
+        ventas.add(venta);
+
+        try (FileOutputStream fileOut = new FileOutputStream(fileName);
+             ObjectOutputStream output = new ObjectOutputStream(fileOut)) {
+            for (Venta v : ventas) {
+                output.writeObject(v);
+            }
             guardado = true;
-        } catch (Exception e) {
-            System.out.println("Ocurrió un error: " + e);
+        } catch (IOException e) {
+            System.out.println("Ocurrió un error al escribir en el archivo: " + e);
         }
 
         return guardado;

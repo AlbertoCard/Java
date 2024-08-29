@@ -74,13 +74,14 @@ public class MenuLineas {
         int prod = Integer.parseInt(scn.nextLine());
 
         venta.EliminarLinea(prod);
+
+        System.out.println("Linea eliminada");
     }
 
     public void mostrarLineas(){
         System.out.println("Productos: \t Unidades: \t Precio: ");
         for (Linea linea : venta.getLineas()){
             if (linea != null){
-                // mostrar las lineas con el toString
                 System.out.println(linea.toString());
             }
         }
