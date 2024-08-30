@@ -1,8 +1,6 @@
 package AgregacionVentas;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Bd {
 
@@ -22,44 +20,45 @@ public class Bd {
     // guardar venta
     public static boolean guardarVenta(Venta venta) {
         String fileName = "ventas.txt";
+        String tempFileName = "temp.txt";
         boolean guardado = false;
-        List<Venta> ventas = new ArrayList<>();
 
-        try (FileInputStream fileIn = new FileInputStream(fileName);
-             ObjectInputStream input = new ObjectInputStream(fileIn)) {
-            while (true) {
+        try (FileInputStream file = new FileInputStream(fileName);
+             ObjectInputStream input = new ObjectInputStream(file);
+             FileOutputStream tempFile = new FileOutputStream(tempFileName);
+             ObjectOutputStream tempOutput = new ObjectOutputStream(tempFile)){
+
+            while (true){
                 try {
-                    ventas.add((Venta) input.readObject());
-                } catch (EOFException e) {
+                    Venta v = (Venta) input.readObject();
+                    tempOutput.writeObject(v);
+                } catch (EOFException e){
                     break;
                 }
             }
-        } catch (FileNotFoundException e) {
 
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Ocurrió un error al leer el archivo: " + e);
+            tempOutput.writeObject(venta);
+            guardado = true;
+
+        } catch (Exception e){
+            System.out.println("Ocurrió un error: " + e);
         }
 
-        // Añadir la nueva venta
-        ventas.add(venta);
+        File viejo = new File(fileName);
+        File nuevo = new File(tempFileName);
 
-        try (FileOutputStream fileOut = new FileOutputStream(fileName);
-             ObjectOutputStream output = new ObjectOutputStream(fileOut)) {
-            for (Venta v : ventas) {
-                output.writeObject(v);
-            }
-            guardado = true;
-        } catch (IOException e) {
-            System.out.println("Ocurrió un error al escribir en el archivo: " + e);
+        if (viejo.delete()){
+            nuevo.renameTo(viejo);
         }
 
         return guardado;
     }
 
     // eliminar venta
-    public static void eliminarVenta(String folio){
+    public static boolean eliminarVenta(String folio){
         String fileName = "ventas.txt";
         String tempFileName = "temp.txt";
+        boolean eliminado = false;
 
         try (FileInputStream file = new FileInputStream(fileName);
              ObjectInputStream input = new ObjectInputStream(file);
@@ -71,6 +70,8 @@ public class Bd {
                     Venta venta = (Venta) input.readObject();
                     if (!venta.getFolio().equals(folio)){
                         tempOutput.writeObject(venta);
+                    } else {
+                        eliminado = true;
                     }
                 } catch (EOFException e){
                     break;
@@ -87,6 +88,7 @@ public class Bd {
         if (viejo.delete()){
             nuevo.renameTo(viejo);
         }
+        return eliminado;
     }
 
     // modificar venta
@@ -121,7 +123,13 @@ public class Bd {
 
                 try {
                     Venta venta = (Venta) input.readObject();
-                    System.out.println(venta.toString());
+                    System.out.println("-----------------------------");
+                    System.out.println(venta.getFolio() + "  |" + venta.getFecha());
+                    for(Linea linea : venta.getLineas()) {
+                        if (linea != null){
+                            System.out.println(linea.getProducto() + " | " + linea.getUnidades() + " | " + linea.getPrecio());
+                        }
+                    }
                 } catch (IOException e){
                     break;
                 }

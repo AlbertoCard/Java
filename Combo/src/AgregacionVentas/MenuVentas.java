@@ -12,7 +12,7 @@ public class MenuVentas {
 
         Bd.crearArchivo();
 
-        System.out.println("Menu de ventas");
+        System.out.println("\tMenu de ventas");
 
         do{
             try{
@@ -53,6 +53,7 @@ public class MenuVentas {
     }
 
     public void mostrarMenu(){
+        System.out.println("-----------------------------");
         System.out.println("1.- Agregar venta");
         System.out.println("2.- Eliminar venta");
         System.out.println("3.- Modificar venta");
@@ -75,7 +76,7 @@ public class MenuVentas {
     public static String generateFolio() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String timestamp = dateFormat.format(new Date());
-        return "F" + timestamp; // Folio con formato F20230826123045
+        return "F" + timestamp;
     }
 
     public static String generateFecha() {
@@ -89,7 +90,11 @@ public class MenuVentas {
         String folio = scn.nextLine();
 
         Bd.eliminarVenta(folio);
-        System.out.println("Venta eliminada");
+        if(Bd.eliminarVenta(folio)){
+            System.out.println("Venta eliminada");
+        } else {
+            System.out.println("Venta no encontrada");
+        }
     }
 
     public void modificarVenta(){
@@ -111,10 +116,9 @@ public class MenuVentas {
 
     public void mostrarVentas(){
         System.out.println("Lista de Ventas:");
-        System.out.println("Folio:\t\t\t Fecha:\t  Lineas:");
+        System.out.println("Folio:\t\t\t | Fecha:");
 
         Bd.mostrarVentas();
     }
-
 
 }
