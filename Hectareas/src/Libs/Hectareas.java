@@ -1,4 +1,4 @@
-package Vista;
+package Libs;
 
 public class Hectareas {
     private int IdHectarea;
