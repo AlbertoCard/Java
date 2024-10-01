@@ -1,4 +1,4 @@
-package Libs;
+package Modelo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Conexion {
     private String url = "jdbc:sqlserver://localhost\\ALBERTO:1434;database=Hectareas;instanse=ALBERTO;encrypt=false;trustServerCertificate=true;";
     private String user = "sa";
-    private String password = "***";
+    private String password = "123";
     private Connection con = null;
 
     public Connection conectar() {

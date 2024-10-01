@@ -1,4 +1,4 @@
-package Libs;
+package Modelo;
 
 public class Hectareas {
     private int IdHectarea;

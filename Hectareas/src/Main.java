@@ -1,6 +1,6 @@
 import Controlador.Controlador;
-import Modelo.Modelo;
 import Vista.Vista;
+import Modelo.Modelo;
 
 public class Main {
     public static void main(String[] args) {

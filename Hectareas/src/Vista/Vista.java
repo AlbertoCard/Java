@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import Controlador.Controlador;
-import Libs.Hectareas;
+import Modelo.Hectareas;
 import java.util.List;
 
 public class Vista extends JFrame{
