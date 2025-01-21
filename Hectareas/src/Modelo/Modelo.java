@@ -10,9 +10,9 @@ public class Modelo {
 
     public static Hectareas Recuperar(int id){
         String consulta = "SELECT * FROM hectarea WHERE IdHectarea = "+id;
+        Conexion conexion = new Conexion();
 
         try {
-            Conexion conexion = new Conexion();
             Connection con = conexion.conectar();
 
             Statement stmt = con.createStatement();
