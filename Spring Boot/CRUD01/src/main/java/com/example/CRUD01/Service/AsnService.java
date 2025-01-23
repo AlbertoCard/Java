@@ -13,4 +13,8 @@ public interface AsnService {
     Asn crearAsn(Asn asn);
 
     List<Asn> findAll();
+
+    Asn actualizarAsn(Asn asn);
+
+    String eliminarAsn(Long asnReference);
 }

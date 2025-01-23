@@ -3,10 +3,7 @@ package com.example.CRUD01.Controller;
 import com.example.CRUD01.Entities.Asn;
 import com.example.CRUD01.Service.AsnService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,7 +28,15 @@ public class CrudController {
         return asnService.crearAsn(asn);
     }
 
-    
+    @PutMapping("/actualizar")
+    public Asn actualizarAsn(@RequestBody Asn asn){
+        return asnService.actualizarAsn(asn);
+    }
+
+    @DeleteMapping("/eliminar/{asnReference}")
+    public String eliminarAsn(@PathVariable Long asnReference){
+        return asnService.eliminarAsn(asnReference);
+    }
 
 
 }
