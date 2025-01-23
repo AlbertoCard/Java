@@ -6,6 +6,8 @@ import com.example.CRUD01.Service.AsnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AsnServiceImpl implements AsnService {
 
@@ -19,6 +21,11 @@ public class AsnServiceImpl implements AsnService {
     @Override
     public Asn crearAsn(Asn asn) {
         return asnRepository.save(asn);
+    }
+
+    @Override
+    public List<Asn> findAll() {
+        return asnRepository.findAll();
     }
 
 }

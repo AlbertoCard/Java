@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class CrudController {
 
@@ -19,8 +21,17 @@ public class CrudController {
         return "Hola Mundo";
     }
 
+    @GetMapping("/listar")
+    public List<Asn> listar(){
+        return asnService.findAll();
+    }
+
     @PostMapping("/crear")
     public Asn crearAsn(@RequestBody Asn asn){
         return asnService.crearAsn(asn);
     }
+
+    
+
+
 }
