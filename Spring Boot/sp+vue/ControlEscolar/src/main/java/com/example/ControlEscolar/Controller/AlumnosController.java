@@ -16,25 +16,24 @@ public class AlumnosController {
     AlumnosService alumnosService;
 
     @GetMapping("/")
-    public String holaMundo(){
+    public String holaMundo() {
         return "Hola Mundo";
     }
 
     @GetMapping("/listarAlumnos")
-    public List<AlumnosEntity> listarAlumnos(){
+    public List<AlumnosEntity> listarAlumnos() {
         return alumnosService.findAll();
     }
 
     @PostMapping("/crearAlumno")
-    public AlumnosEntity crearAlumno(@RequestBody AlumnosEntity nuevoAlumno){
+    public AlumnosEntity crearAlumno(@RequestBody AlumnosEntity nuevoAlumno) {
         return alumnosService.save(nuevoAlumno);
     }
 
     @PutMapping("/actualizarAlumno")
-    public AlumnosEntity actualizarAlumno(@RequestBody AlumnosEntity alumno){
+    public AlumnosEntity actualizarAlumno(@RequestBody AlumnosEntity alumno) {
         return alumnosService.update(alumno);
     }
-
 
 
 }
