@@ -1,6 +1,6 @@
 package com.example.multiplesConexiones.Controller;
 
-import com.example.multiplesConexiones.Entities.Asn;
+import com.example.multiplesConexiones.Entities.Mydb.Asn;
 import com.example.multiplesConexiones.Service.AsnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

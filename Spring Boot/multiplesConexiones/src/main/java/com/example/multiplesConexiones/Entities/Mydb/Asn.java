@@ -1,8 +1,7 @@
-package com.example.multiplesConexiones.Entities;
+package com.example.multiplesConexiones.Entities.Mydb;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
