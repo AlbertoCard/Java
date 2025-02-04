@@ -1,4 +1,4 @@
-package com.example.multiplesConexiones.Config;
+package com.example.multi_datasource.Config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,11 @@ import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
-        basePackages = "com.example.multiplesConexiones.Repository.ControlEscolar",
+        basePackages = "com.example.multi_datasource.Repository.ControlEscolar",
         entityManagerFactoryRef = "controlEscolarEntityManagerFactory",
         transactionManagerRef = "controlEscolarTransactionManager"
 )
-public class ControlEscolarConfiguration {
+public class ControlEscolarConfig {
     @Autowired
     private Environment env;
 
@@ -41,7 +41,7 @@ public class ControlEscolarConfiguration {
     public LocalContainerEntityManagerFactoryBean controlEscolarEntityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(controlEscolarDataSource());
-        em.setPackagesToScan("com.example.multiplesConexiones.Entities.ControlEscolar");
+        em.setPackagesToScan("com.example.multi_datasource.Entities.ControlEscolar");
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -56,8 +56,8 @@ public class ControlEscolarConfiguration {
 
     @Bean(name = "controlEscolarTransactionManager")
     public PlatformTransactionManager controlEscolarTransactionManager() {
-            JpaTransactionManager transactionManager = new JpaTransactionManager();
-            transactionManager.setEntityManagerFactory(controlEscolarEntityManagerFactory().getObject());
-            return transactionManager;
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(controlEscolarEntityManagerFactory().getObject());
+        return transactionManager;
     }
 }

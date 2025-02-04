@@ -1,0 +1,34 @@
+mydb:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydb?currentSchema=public&ApplicationName=wms-sys-asn&socketTimeout=30
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: albertopsql
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    properties:
+      hibernate:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: update
+        format_sql: true
+
+controlescolar:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ControlEscolar?currentSchema=public&ApplicationName=wms-sys-asn&socketTimeout=30
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: albertopsql
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    properties:
+      hibernate:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: update
+      format_sql: true
+
+server:
+  port: 8081
