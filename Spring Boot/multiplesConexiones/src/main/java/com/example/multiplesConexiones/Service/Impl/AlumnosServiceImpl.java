@@ -1,8 +1,8 @@
-package com.example.ControlEscolar.Service.Impl;
+package com.example.multiplesConexiones.Service.Impl;
 
-import com.example.ControlEscolar.Entities.AlumnosEntity;
-import com.example.ControlEscolar.Repository.AlumnosRepository;
-import com.example.ControlEscolar.Service.AlumnosService;
+import com.example.multiplesConexiones.Entities.ControlEscolar.AlumnosEntity;
+import com.example.multiplesConexiones.Repository.ControlEscolar.AlumnosRepository;
+import com.example.multiplesConexiones.Service.AlumnosService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

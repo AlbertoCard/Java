@@ -1,9 +1,11 @@
 package com.example.multiplesConexiones.Controller;
 
+import com.example.multiplesConexiones.Entities.ControlEscolar.AlumnosEntity;
 import com.example.multiplesConexiones.Entities.Mydb.Asn;
 import com.example.multiplesConexiones.Service.AsnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.multiplesConexiones.Service.AlumnosService;
 
 import java.util.List;
 
@@ -38,4 +40,22 @@ public class MultiConexionesController {
         return asnService.eliminarAsn(asnReference);
     }
 
+
+
+
+
+    // segunda bd
+
+    @Autowired
+    AlumnosService alumnosService;
+
+    @GetMapping("/alumnos/listar")
+    public List<AlumnosEntity> listarAlumnos() {
+        return alumnosService.findAll();
+    }
+
+
 }
+
+
+

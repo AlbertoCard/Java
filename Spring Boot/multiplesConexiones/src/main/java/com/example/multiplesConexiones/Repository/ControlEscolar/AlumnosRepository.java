@@ -1,6 +1,6 @@
-package com.example.ControlEscolar.Repository;
+package com.example.multiplesConexiones.Repository.ControlEscolar;
 
-import com.example.ControlEscolar.Entities.AlumnosEntity;
+import com.example.multiplesConexiones.Entities.ControlEscolar.AlumnosEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
