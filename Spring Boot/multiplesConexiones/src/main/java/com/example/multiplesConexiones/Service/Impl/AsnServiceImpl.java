@@ -1,7 +1,7 @@
 package com.example.multiplesConexiones.Service.Impl;
 
 import com.example.multiplesConexiones.Entities.Asn;
-import com.example.multiplesConexiones.Repository.AsnRepository;
+import com.example.multiplesConexiones.Repository.Mydb.AsnRepository;
 import com.example.multiplesConexiones.Service.AsnService;
 import org.springframework.stereotype.Service;
 
